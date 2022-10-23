@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : NetworkBehaviour
 {
-    public Side StageSide;
+    public NetworkVariable<Side> StageSide;
 
     private void Update()
     {
-        transform.localRotation = Quaternion.Euler(0, StageSide == Side.Right ? 180 : 0, 0);
+        transform.rotation = Quaternion.Euler(0, StageSide.Value == Side.Right ? 180 : 0, 0);
     }
 }

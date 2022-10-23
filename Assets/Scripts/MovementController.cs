@@ -10,28 +10,25 @@ public class MovementController : NetworkBehaviour
     private Entity entity;
     private float RayCastDistance => 100f;
 
-    #region Network Properties
-
-    public NetworkVariable<Vector3> Position = new();
-
-    #endregion
-
-    private void Start()
+    public override void OnNetworkSpawn()
     {
         entity = GetComponent<Entity>();
-        Position.Value = transform.position;
-    }
-
-    private void Update()
-    {
-        transform.position = Position.Value;
     }
 
     [ServerRpc]
-    public void MoveAdjacentServerRpc(Vector2 dir)
+    public void RequestAdjacentMovementServerRpc(bool[] inputs, ServerRpcParams serverRpcParams = default)
     {
+        Vector2 moveDir = Vector2.zero;
+        if (inputs[0]) moveDir.y = +1f;
+        if (inputs[1]) moveDir.y = -1f;
+        if (inputs[2]) moveDir.x = -1f;
+        if (inputs[3]) moveDir.x = +1f;
+
+        if (moveDir == Vector2.zero)
+            return;
+
         Vector2 origin = new(transform.position.x, transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(origin, dir, RayCastDistance, UltraMan.LayerMasks.Stage);
+        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, RayCastDistance, UltraMan.LayerMasks.Stage);
 
         if (hit.collider == null)
             return;
@@ -39,13 +36,15 @@ public class MovementController : NetworkBehaviour
         if (!hit.collider.TryGetComponent(out Entity stageEntity))
             throw new System.ApplicationException(hit.collider.name + " does not contain an Entity component");
 
-        if(stageEntity.StageSide != entity.StageSide)
+        if(stageEntity.StageSide.Value != entity.StageSide.Value)
             return;
+
+        Debug.Log(hit.collider.name);
 
         if (animator != null)
             animator.SetTrigger(UltraMan.AnimationParameters.OnPhaseTrigger);
 
-        Position.Value = new Vector3(
+        transform.position = new Vector3(
             hit.collider.transform.position.x,
             hit.collider.transform.position.y,
             transform.position.z);

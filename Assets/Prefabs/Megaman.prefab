@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 4530664241949067024}
   - component: {fileID: -3805112547775833887}
   - component: {fileID: -7818137643968182990}
+  - component: {fileID: -7936022481611327858}
   m_Layer: 0
   m_Name: Megaman
   m_TagString: Untagged
@@ -208,8 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: -7818137643968182990}
-  Position:
-    m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!114 &4530664241949067038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256b00d2e7d60b340864094f560d0c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageSide: 0
+  StageSide:
+    m_InternalValue: 0
 --- !u!114 &4530664241949067037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,13 +265,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
   SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -290,6 +290,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 4530664241949067034}
+--- !u!114 &-7936022481611327858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530664241949067033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0e3153c59d5c643ac432c686458c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4530664242096040042
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a295033ec978a264aad23d37a8319e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentTransform: {fileID: 4530664241949067036}
 --- !u!1 &4530664242517142802
 GameObject:
   m_ObjectHideFlags: 0

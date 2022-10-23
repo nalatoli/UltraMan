@@ -4,33 +4,36 @@ using UnityEngine;
 using Unity.Netcode;
 
 [RequireComponent(typeof(MovementController))]
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : NetworkBehaviour
 {
     private MovementController movementController;
 
-    private Vector2 lastSnapInput = Vector2.zero;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
         movementController = GetComponent<MovementController>();
     }
 
     void Update()
     {
-        Vector2 snapInput = GetSnapInput();
-        if (snapInput != lastSnapInput)
-        {
-            if(snapInput != Vector2.zero)
-                movementController.MoveAdjacentServerRpc(snapInput);
-                
-            lastSnapInput = snapInput;
-        }
+        if (!IsOwner)
+            return;
+
+        if(TryGetInput(out bool[] input))
+            movementController.RequestAdjacentMovementServerRpc(input);
+
     }
 
-    private Vector2 GetSnapInput()
+    private bool TryGetInput(out bool[] input)
     {
-        float hInput = Input.GetAxisRaw("Horizontal");
-        float vInput = Input.GetAxisRaw("Vertical");
-        return new Vector2(Mathf.Sign(hInput) * Mathf.Ceil(Mathf.Abs(hInput)), Mathf.Sign(vInput) * Mathf.Ceil(Mathf.Abs(vInput)));
+        input = new bool[4];
+        bool inputDetected = false;
+
+        if (Input.GetKeyDown(KeyCode.W)) { input[0] = true; inputDetected = true; }
+        if (Input.GetKeyDown(KeyCode.S)) { input[1] = true; inputDetected = true; }
+        if (Input.GetKeyDown(KeyCode.A)) { input[2] = true; inputDetected = true; }
+        if (Input.GetKeyDown(KeyCode.D)) { input[3] = true; inputDetected = true; }
+
+        return inputDetected;
     }
 }
