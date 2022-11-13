@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "xfB63gDKYnzhLzWhhkoinj5sY8lc0E3cCLVnXNNO7UYr0A73DF4qZutIznuS/LkHi9+hWgiUHmc0R3JmoGv59Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nor\\Documents\\Projects\\UltraMan\\Launcher\\Launcher\\Launcher.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nor\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Nor\\.nuget\\packages\\octokit\\4.0.1\\octokit.4.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

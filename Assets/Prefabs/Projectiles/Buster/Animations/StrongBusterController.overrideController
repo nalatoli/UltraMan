@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StrongBusterController
+  m_Controller: {fileID: 9100000, guid: 9434d66d393e8fb46bb3c971da6b94be, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e6d7a965de04f134aae4be6f2f131512, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f1cf2d7c2a7107e4faed7bc5835a150c, type: 2}

@@ -7,6 +7,10 @@ namespace UltraMan
     public static class AnimationParameters
     {
         public static string OnPhaseTrigger => "OnPhase";
+
+        public static string IsShootingBool => "IsShooting";
+
+        public static string OnDeathTrigger => "OnDeath";
     }
 }
 

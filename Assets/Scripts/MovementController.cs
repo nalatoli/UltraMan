@@ -16,13 +16,13 @@ public class MovementController : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void RequestAdjacentMovementServerRpc(bool[] inputs, ServerRpcParams serverRpcParams = default)
+    public void RequestAdjacentMovementServerRpc(InputState input, ServerRpcParams serverRpcParams = default)
     {
         Vector2 moveDir = Vector2.zero;
-        if (inputs[0]) moveDir.y = +1f;
-        if (inputs[1]) moveDir.y = -1f;
-        if (inputs[2]) moveDir.x = -1f;
-        if (inputs[3]) moveDir.x = +1f;
+        if (input.IsMoveUpKeyDown) moveDir.y = +1f;
+        if (input.IsMoveDownKeyDown) moveDir.y = -1f;
+        if (input.IsMoveLeftKeyDown) moveDir.x = -1f;
+        if (input.IsMoveRightKeyDown) moveDir.x = +1f;
 
         if (moveDir == Vector2.zero)
             return;
@@ -38,8 +38,6 @@ public class MovementController : NetworkBehaviour
 
         if(stageEntity.StageSide.Value != entity.StageSide.Value)
             return;
-
-        Debug.Log(hit.collider.name);
 
         if (animator != null)
             animator.SetTrigger(UltraMan.AnimationParameters.OnPhaseTrigger);
